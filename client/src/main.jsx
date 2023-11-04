@@ -5,9 +5,7 @@ import "./index.css";
 import UserProvider from "./store/Context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <UserProvider>
+  <UserProvider>
     <App />
-    </UserProvider>
-  </React.StrictMode>
+  </UserProvider>
 );

@@ -29,6 +29,7 @@ const UploadPage = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const { state } = useUserContext();
   const { user, isLoggedIn, isSeller } = state;
+  const [isUploaded, setIsUploaded] = useState(false);
 
   const onDrop = (acceptedFiles) => {
     setUploadedFile(acceptedFiles[0]);
@@ -53,7 +54,7 @@ const UploadPage = () => {
       );
 
       if (response.ok) {
-        // Handle success
+        setIsUploaded(true);
       } else {
         const responseData = await response.json();
         alert(responseData.error);
@@ -75,77 +76,88 @@ const UploadPage = () => {
       <Navbar isHomePage={false} />
       <Paper
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           padding: "20px",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
         }}
         elevation={2}
       >
-        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-          <CloudUploadIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Upload Video
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          {
-            <>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="title"
-                    label="Title"
-                    name="Title"
-                    autoComplete="title"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="location"
-                    label="Location"
-                    name="Location"
-                    autoComplete="location"
-                  />
-                </Grid>
-              </Grid>
-              <Box
-                {...getRootProps()}
-                style={{
-                  cursor: "pointer",
-                  border: "2px dotted",
-                  padding: "20px",
-                  textAlign: "center",
-                  marginTop: "16px",
-                }}
-              >
-                <input {...getInputProps()} />
-                <Typography component="p" variant="body1" color="#666">
-                  Drag 'n' drop a video file here, or click to select one.
-                </Typography>
-              </Box>
+        {isUploaded ? (
+          <Typography component="p" variant="body1" sx={{}}>
+            Upload successful!
+          </Typography>
+        ) : (
+          <>
+            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+              <CloudUploadIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Upload Video
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              {
+                <>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="title"
+                        label="Title"
+                        name="Title"
+                        autoComplete="title"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="location"
+                        label="Location"
+                        name="Location"
+                        autoComplete="location"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Box
+                    {...getRootProps()}
+                    style={{
+                      cursor: "pointer",
+                      border: "2px dotted",
+                      padding: "20px",
+                      textAlign: "center",
+                      marginTop: "16px",
+                    }}
+                  >
+                    <input {...getInputProps()} />
+                    <Typography component="p" variant="body1" color="#666">
+                      Drag 'n' drop a video file here, or click to select one.
+                    </Typography>
+                  </Box>
 
-              {uploadedFile && (
-                <Typography component="p" variant="body1">
-                  File selected: {uploadedFile.name}
-                </Typography>
-              )}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Upload
-              </Button>
-            </>
-          }
-        </Box>
+                  {uploadedFile && (
+                    <Typography component="p" variant="body1">
+                      File selected: {uploadedFile.name}
+                    </Typography>
+                  )}
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Upload
+                  </Button>
+                </>
+              }
+            </Box>
+          </>
+        )}
       </Paper>
       {loading && (
         <Backdrop
