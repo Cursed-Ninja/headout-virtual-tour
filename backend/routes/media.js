@@ -1,8 +1,8 @@
-const express = require("express");
-const mediaController = require("../controllers/mediaController");
-const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
+import express from "express";
+import { getAll, create } from "../controllers/upload.js";
+import multer from "multer";
+import fs from "fs";
+import path from "path";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -37,7 +37,7 @@ const upload = multer({
 const router = express.Router();
 
 //get all media
-router.get("/all", mediaController.getAll);
+router.get("/all", getAll);
 
 //post create new media
 router.post(
@@ -48,7 +48,7 @@ router.post(
             maxCount: 5,
         },
     ]),
-    mediaController.create
+    create
 );
 
 export default router;

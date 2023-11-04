@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /* ROUTES */
 app.use("/auth", authRoutes);
-app.use("/api/v1/media", mediaRoutes);
+app.use("/media", mediaRoutes);
 
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL, {
