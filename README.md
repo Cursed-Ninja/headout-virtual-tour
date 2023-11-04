@@ -45,6 +45,7 @@ To set up this project, follow these steps:
 - Three.js: Used for creating the 360 video player.
 - Babylon.js: Utilized for the 3D playground.
 - MaterialUI: For UI design and components.
+- TailwindCSS: For styling the components.
 
 ### Backend
 
@@ -77,3 +78,10 @@ You can experience the Headout Virtual Tour by visiting the deployed version at 
 For an alternative experience, you can access the Headout Virtual Tour on the Azure VM hosted container at [http://98.70.56.206:5000/](http://98.70.56.206:5000/). This link does not provide HTTPS, but it allows you to upload videos for an immersive tour experience.
 
 We hope you enjoy exploring various destinations from the comfort of your home on either platform! If you have any questions or feedback, please don't hesitate to reach out to us. Thank you for using Headout Virtual Tour!
+
+![Screenshot (258)](https://github.com/Cursed-Ninja/headout-virtual-tour/assets/77842809/16ac8a77-6c43-4522-9b31-b2ecf2b51d7b)
+![Screenshot (260)](https://github.com/Cursed-Ninja/headout-virtual-tour/assets/77842809/418f0fa7-1669-47d0-87d3-0f38a2c07322)
+![Screenshot (263)](https://github.com/Cursed-Ninja/headout-virtual-tour/assets/77842809/fbc6733b-a0ac-4f74-a4ec-6fb593f64851)
+![Screenshot (262)](https://github.com/Cursed-Ninja/headout-virtual-tour/assets/77842809/c39785c0-65ea-4f6e-ab35-7d3558c6c442)
+<img alt="Screenshot 2023-11-05 040457" src="https://github.com/Cursed-Ninja/headout-virtual-tour/assets/77842809/9dfda6cc-637a-4cd5-b61a-10a6bcfd29f3">
+
