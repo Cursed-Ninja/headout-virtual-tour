@@ -18,7 +18,7 @@ export default function Tours() {
       </h1>
       <div className="flex flex-row">
         {tours.map((tour) => (
-          <Tour key={tour._id} title={tour.title} location={tour.location} />
+          <Tour key={tour._id} title={tour.title} thumbnail={tour.thumbnail} location={tour.location} />
         ))}
       </div>
     </div>

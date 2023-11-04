@@ -6,47 +6,45 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {
-  Backdrop,
-  CircularProgress,
-  Paper,
-  Select,
-  FormControl,
-  MenuItem,
-  InputLabel,
-} from "@mui/material";
+import { Backdrop, CircularProgress, Paper } from "@mui/material";
 import Navbar from "../components/Navbar";
 import { useUserContext } from "../store/Context";
+import FileUpload from "../components/FileUpload";
 
 const UploadPage = () => {
   const [loading, setLoading] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const { state } = useUserContext();
-  const { user, isLoggedIn, isSeller } = state;
   const [isUploaded, setIsUploaded] = useState(false);
-
-  const onDrop = (acceptedFiles) => {
-    setUploadedFile(acceptedFiles[0]);
-  };
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const [uploadedVideoFile, setUploadedVideoFile] = useState(null);
+  const [uploadedThumbnailFile, setUploadedThumbnailFile] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
+    const convertBase64 = async (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
+    };
+
     try {
       const formData = new FormData(event.currentTarget);
-      formData.append("videos", uploadedFile);
-
+      formData.append("thumbnail", await convertBase64(uploadedThumbnailFile));
+      formData.append("video", uploadedVideoFile);
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/media/create`,
+        `${import.meta.env.VITE_SERVER_URL}/media/upload`,
         {
           method: "POST",
           body: formData,
@@ -124,27 +122,16 @@ const UploadPage = () => {
                       />
                     </Grid>
                   </Grid>
-                  <Box
-                    {...getRootProps()}
-                    style={{
-                      cursor: "pointer",
-                      border: "2px dotted",
-                      padding: "20px",
-                      textAlign: "center",
-                      marginTop: "16px",
-                    }}
-                  >
-                    <input {...getInputProps()} />
-                    <Typography component="p" variant="body1" color="#666">
-                      Drag 'n' drop a video file here, or click to select one.
-                    </Typography>
-                  </Box>
-
-                  {uploadedFile && (
-                    <Typography component="p" variant="body1">
-                      File selected: {uploadedFile.name}
-                    </Typography>
-                  )}
+                  <FileUpload
+                    uploadedFile={uploadedVideoFile}
+                    setUploadedFile={setUploadedVideoFile}
+                    fileType="video"
+                  />
+                  <FileUpload
+                    uploadedFile={uploadedThumbnailFile}
+                    setUploadedFile={setUploadedThumbnailFile}
+                    fileType="thumbnail (image)"
+                  />
                   <Button
                     type="submit"
                     fullWidth

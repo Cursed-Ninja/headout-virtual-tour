@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Tour({ title, location }) {
+export default function Tour({ title, location, thumbnail }) {
   return (
     <div>
       <img
-        src={""}
+        src={thumbnail}
         alt="card-1"
         className="aspect-video object-cover object-top h-[150px] top-[521px] left-[37px] radius-[9px] rounded"
       />
