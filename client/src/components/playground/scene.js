@@ -1,7 +1,7 @@
 import { createCollisionBox, renderMesh } from "./utility";
 import { initHero } from "./hero";
 import { meshes } from "./meshes";
-import { collisionBoxes } from "./collisionBoxes";
+import { collisionBoxes, isVisible } from "./collisionBoxes";
 
 export const createScene = (engine, canvasRef) => {
   engine.enableOfflineSupport = false;
@@ -9,10 +9,10 @@ export const createScene = (engine, canvasRef) => {
 
   const camera1 = new BABYLON.ArcRotateCamera(
     "camera1",
-    Math.PI / 2,
-    Math.PI / 4,
+    0,
+    0,
     2.5,
-    new BABYLON.Vector3(0, 2, -6),
+    new BABYLON.Vector3(0, 0, 0),
     newScene
   );
   newScene.activeCamera = camera1;
@@ -30,12 +30,12 @@ export const createScene = (engine, canvasRef) => {
   light.intensity = 0.6;
   light.specular = BABYLON.Color3.Black();
 
-  let light2 = new BABYLON.DirectionalLight(
-    "dir01",
-    new BABYLON.Vector3(0, -0.5, -1.0),
-    newScene
-  );
-  light2.position = new BABYLON.Vector3(0, 5, 5);
+//   let light2 = new BABYLON.DirectionalLight(
+//     "dir01",
+//     new BABYLON.Vector3(0, -0.5, -1.0),
+//     newScene
+//   );
+//   light2.position = new BABYLON.Vector3(0, 5, 5);
 
   // Skybox
   let skybox = BABYLON.MeshBuilder.CreateBox(
@@ -76,7 +76,6 @@ export const createScene = (engine, canvasRef) => {
   );
 
 //   createCollisionBox(0, 1, 10, 2, newScene);
-  const isVisible = true;
   for(const collisonBox of collisionBoxes) {
     createCollisionBox({ ...collisonBox, newScene, isVisible})
   }

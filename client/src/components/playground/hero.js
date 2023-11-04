@@ -13,8 +13,9 @@ const initHero = (camera1, newScene, inputMap) => {
         { size: 0.1 },
         newScene
       );
-      headRef.setEnabled = false;
-      headRef.position = new BABYLON.Vector3(0, 2.2, 0)
+      headRef.setEnabled(false);
+      headRef.position = new BABYLON.Vector3(-26, 2, -50);
+      hero1.position = new BABYLON.Vector3(-26, 0, -50);
 
       camera1.target = headRef;
 
