@@ -31,16 +31,13 @@ const SignIn = () => {
     };
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/auth/signin`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       const responseData = await response.json();
 
