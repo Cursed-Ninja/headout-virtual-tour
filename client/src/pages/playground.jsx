@@ -1,42 +1,80 @@
 import React, { useEffect, useRef } from "react";
-import * as BABYLON from "babylonjs";
+import { createScene } from "../components/playground/scene";
 
-const BabylonScene = () => {
+const BabylonJSScene = () => {
   const canvasRef = useRef(null);
+  let engine = null;
+  let scene = null;
+  let sceneToRender = null;
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-
-    var engine = new BABYLON.Engine(canvas, true, {
-      preserveDrawingBuffer: true,
-      stencil: true,
-      disableWebGL2Support: false,
-    });
-
-    var scene = new BABYLON.Scene(engine);
-
-    // Rest of your Babylon.js scene setup code here...
-
-    engine.runRenderLoop(function () {
-      if (scene && scene.activeCamera) {
-        scene.render();
+    const asyncEngineCreation = async () => {
+      try {
+        return createDefaultEngine();
+      } catch (e) {
+        console.log(
+          "The available createEngine function failed. Creating the default engine instead."
+        );
+        return createDefaultEngine();
       }
+    };
+
+    const startRenderLoop = (engine, canvas) => {
+      engine.runRenderLoop(() => {
+        if (sceneToRender && sceneToRender.activeCamera) {
+          sceneToRender.render();
+        }
+      });
+    };
+
+    const createDefaultEngine = () => {
+      return new BABYLON.Engine(canvasRef.current, true, {
+        preserveDrawingBuffer: true,
+        stencil: true,
+        disableWebGL2Support: false,
+      });
+    };
+
+    asyncEngineCreation().then(async (createdEngine) => {
+      engine = createdEngine;
+
+      if (!engine) throw "Engine should not be null.";
+      startRenderLoop(engine, canvasRef.current);
+      scene = createScene(engine, canvasRef);
+      sceneToRender = scene;
     });
 
-    window.addEventListener("resize", function () {
+    window.addEventListener("resize", () => {
       engine.resize();
     });
 
     return () => {
-      engine.dispose();
+      if (scene) {
+        scene.dispose();
+      }
+      if (engine) {
+        engine.dispose();
+      }
     };
   }, []);
 
   return (
-    <div id="canvasZone">
-      <canvas ref={canvasRef} id="renderCanvas"></canvas>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+        margin: 0,
+        padding: 0,
+      }}
+    >
+      <canvas
+        id="renderCanvas"
+        ref={canvasRef}
+        style={{ width: "100%", height: "100%", touchAction: "none" }}
+      ></canvas>
     </div>
   );
 };
 
-export default BabylonScene;
+export default BabylonJSScene;
