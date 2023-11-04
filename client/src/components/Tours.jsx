@@ -10,15 +10,21 @@ export default function Tours() {
       setTours(data);
     })();
   }, []);
-
+  console.log(tours);
   return (
-    <div className="container mx-[90px]" onClick={()=>navigate("/")}>
+    <div className="container mx-[90px]">
       <h1 className="my-10 text-3xl">
         <b>Explore Our Virtual Tours</b>
       </h1>
-      <div className="flex flex-row">
+      <div className="flex flex-wrap justify-between gap-3">
         {tours.map((tour) => (
-          <Tour key={tour._id} title={tour.title} thumbnail={tour.thumbnail} location={tour.location} />
+          <Tour
+            key={tour._id}
+            id={tour._id}
+            title={tour.title}
+            thumbnail={tour.thumbnail}
+            location={tour.location}
+          />
         ))}
       </div>
     </div>

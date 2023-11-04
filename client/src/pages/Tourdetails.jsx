@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { useParams } from "react-router";
 
 const TourDetails = () => {
   const containerRef = useRef();
@@ -11,6 +12,19 @@ const TourDetails = () => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+  const [videoUrl, setVideoUrl] = useState(null);
+  const id = useParams().id;
+
+  useEffect(() => {
+    (async () => {
+      console.log(id);
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/media/one?id=${id}`
+      );
+      const data = await res.json();
+      setVideoUrl(data.videos);
+    })();
+  }, []);
 
   const updateWindowDimensions = () => {
     setWindowDimensions({
@@ -27,6 +41,7 @@ const TourDetails = () => {
   }, []);
 
   useEffect(() => {
+    if (videoUrl === null) return;
     const scene = new THREE.Scene();
     const width = windowDimensions.width;
     const height = windowDimensions.height;
@@ -37,7 +52,7 @@ const TourDetails = () => {
     containerRef.current.appendChild(renderer.domElement);
     const geometry = new THREE.SphereGeometry(15, 32, 16);
     const videoElement = document.createElement("video");
-    videoElement.src = "https://s.bepro11.com/vr-video-sample.mp4";
+    videoElement.src = videoUrl;
     videoElement.loop = true;
     videoElement.muted = false;
     videoElement.playsInline = true;
@@ -84,7 +99,7 @@ const TourDetails = () => {
 
       const { movementX, movementY } = e;
       const sensitivity = 0.01;
-      
+
       yaw -= movementX * sensitivity;
       pitch += movementY * sensitivity;
       pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, pitch));
@@ -118,8 +133,9 @@ const TourDetails = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("click", videoPlay);
       renderer.dispose();
+      videoElement.pause();
     };
-  }, []);
+  }, [videoUrl]);
 
   return (
     <div ref={containerRef} className="tourdetails">
@@ -142,7 +158,7 @@ const TourDetails = () => {
               position: "absolute",
               top: "45%",
               left: "50%",
-              color: "white"
+              color: "white",
             }}
           >
             <PlayCircleOutlineIcon />
