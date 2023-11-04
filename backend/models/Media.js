@@ -10,7 +10,7 @@ const MediaSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        videos: type: String,
+        videos: { type: String, }
     },
     {
         timestamps: true,
