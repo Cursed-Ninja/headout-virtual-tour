@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
@@ -11,7 +11,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Backdrop, CircularProgress, Paper } from "@mui/material";
+import {
+  Backdrop,
+  CircularProgress,
+  Paper,
+  Select,
+  FormControl,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 
 const SignUp = () => {
   const [emailSent, setEmailSent] = useState(false);
@@ -68,7 +76,7 @@ const SignUp = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px"
+          padding: "20px",
         }}
         elevation={10}
       >
@@ -118,6 +126,19 @@ const SignUp = () => {
                     name="email"
                     autoComplete="email"
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel id="role-select-label">Role</InputLabel>
+                    <Select
+                      labelId="role-select-label"
+                      id="role-select"
+                      label="Role"
+                    >
+                      <MenuItem value={true}>Client</MenuItem>
+                      <MenuItem value={false}>Seller</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
               </Grid>
               <Button
