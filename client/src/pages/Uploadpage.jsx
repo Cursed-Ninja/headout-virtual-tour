@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {
@@ -41,13 +41,16 @@ const UploadPage = () => {
     setLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("videoFile", uploadedFile);
+      const formData = new FormData(event.currentTarget);
+      formData.append("videos", uploadedFile);
 
-      const response = await fetch("/your-backend-endpoint", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/media/create`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         // Handle success
@@ -69,7 +72,7 @@ const UploadPage = () => {
       <div class="circle medium shade4"></div>
       <div class="circle small shade5"></div>
       <CssBaseline />
-      <Navbar isHomePage={false}/>
+      <Navbar isHomePage={false} />
       <Paper
         sx={{
           marginTop: 8,
@@ -118,7 +121,7 @@ const UploadPage = () => {
                   border: "2px dotted",
                   padding: "20px",
                   textAlign: "center",
-                  marginTop: "16px"
+                  marginTop: "16px",
                 }}
               >
                 <input {...getInputProps()} />

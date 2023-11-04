@@ -1,23 +1,23 @@
-
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer, useContext } from "react";
 
 const initialState = {
-  user: null,
-  isLoggedIn: false,
-  isSeller: null,
+  user: JSON.parse(localStorage.getItem("user")),
+  isLoggedIn: localStorage.getItem("user") ? true : false,
+  isSeller: JSON.parse(localStorage.getItem("user"))?.isSeller,
 };
 
 // Define reducer function
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case "LOGIN":
+      localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
         user: action.payload,
         isLoggedIn: true,
         isSeller: action.payload.isSeller,
       };
-    case 'LOGOUT':
+    case "LOGOUT":
       return {
         ...state,
         user: null,

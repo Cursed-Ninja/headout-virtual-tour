@@ -6,6 +6,7 @@ import dotenv from "dotenv"; // For extracting data from env files
 import morgan from "morgan"; // For logging requests into console
 
 import authRoutes from "./routes/auth.js" // importing authentication related routers
+import mediaRoutes from "./routes/media.js" // importing media related routers
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /* ROUTES */
 app.use("/auth", authRoutes);
+app.use("/media", mediaRoutes);
 
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL, {
