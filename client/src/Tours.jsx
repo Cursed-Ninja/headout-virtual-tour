@@ -3,8 +3,8 @@ import Tour from "./Tour";
 
 export default function Tours() {
   return (
-    <div>
-      <h1 className="m-10 text-3xl">
+    <div className="container mx-[90px]">
+      <h1 className="my-10 text-3xl">
         <b>Explore Our Virtual Tours</b>
       </h1>
       <div className="flex flex-row">

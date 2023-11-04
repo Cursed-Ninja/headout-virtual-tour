@@ -8,11 +8,11 @@ export default function Overlay() {
     <div className="relative">
       <Background />
       <Navbar />
-      <div className="absolute inset-0 p-4 flex flex-col justify-end">
+      <div className="absolute inset-0 p-4 flex flex-col justify-end ml-[90px]">
         <div className="text-white text-2xl">
           <b>The world's best experiences curated just for you</b>
         </div>
-        <div className="relative mt-4 flex">
+        <div className="relative mt-4 flex w-[1400px]">
           <input
             type="text"
             className="border-2 bg-white text-black placeholder-black py-2 pl-10 pr-4 rounded-lg w-1/4 "

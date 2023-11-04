@@ -4,7 +4,7 @@ import Values from "./Values";
 
 export default function ValueList() {
   return (
-    <div className="flex justify-evenly mt-10">
+    <div className="flex justify-between mt-10 mx-[90px]">
       {Values.map((value) => (
         <Value
           key={value.id}
