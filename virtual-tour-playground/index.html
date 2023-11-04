@@ -84,14 +84,14 @@
         "camera1",
         -Math.PI / 2,
         Math.PI / 4,
-        12,
-        new BABYLON.Vector3(0, -5, 0),
+        2,
+        new BABYLON.Vector3(0, 1, 0),
         scene
       );
       scene.activeCamera = camera1;
       scene.activeCamera.attachControl(canvas, true);
-      camera1.lowerRadiusLimit = 5;
-      camera1.upperRadiusLimit = 15;
+      camera1.lowerRadiusLimit = 2;
+      camera1.upperRadiusLimit = 2;
       camera1.lowerBetaLimit = 0;
       camera1.wheelDeltaPercentage = 0.01;
 
@@ -205,8 +205,52 @@
           //Position the character
           // hero1.position = new BABYLON.Vector3(4, 0, 0);
           const landscape = newMeshes[0];
-          landscape.position = new BABYLON.Vector3(0, -1, 0);
+          landscape.position = new BABYLON.Vector3(0, -4, 0);
+          landscape.scaling.scaleInPlace(4)
+        }
+      );
 
+      var headref
+      BABYLON.SceneLoader.ImportMesh(
+        "",
+        "https://assets.babylonjs.com/meshes/",
+        "box.glb",
+        scene,
+        function (newMeshes, particleSystems, skeletons, animationGroups) {
+          headref = newMeshes[0];
+          headref.position = new BABYLON.Vector3(0, 2, 0);
+          headref.scaling.scaleInPlace(0.1);
+          headref.setEnabled(false)
+
+          camera1.target = headref;
+
+          scene.onBeforeRenderObservable.add(() => {
+            var keydown = false;
+            var headrefSpeed = 0.03;
+            var headrefSpeedBackwards = 0.01;
+            var headrefRotationSpeed = 0.1;
+            //Manage the movements of the character (e.g. position, direction)
+            if (inputMap["w"]) {
+              headref.moveWithCollisions(
+                headref.forward.scaleInPlace(headrefSpeed)
+              );
+              keydown = true;
+            }
+            if (inputMap["s"]) {
+              headref.moveWithCollisions(
+                headref.forward.scaleInPlace(-headrefSpeedBackwards)
+              );
+              keydown = true;
+            }
+            if (inputMap["a"]) {
+              headref.rotate(BABYLON.Vector3.Up(), -headrefRotationSpeed);
+              keydown = true;
+            }
+            if (inputMap["d"]) {
+              headref.rotate(BABYLON.Vector3.Up(), headrefRotationSpeed);
+              keydown = true;
+            }
+          });
         }
       );
 
@@ -227,7 +271,7 @@
           // hero1.position = new BABYLON.Vector3(4, 0, 0);
 
           //Lock camera on the character
-          camera1.target = hero1;
+          // camera1.target = headref;
 
           //hero1 character variables
           var hero1Speed = 0.03;
@@ -330,7 +374,7 @@
 
       var lastPrintTime = 0;
       scene.onBeforeRenderObservable.add(() => {
-        if (hero1) {
+        if (hero1 && headref) {
           var currentTime = Date.now();
           if (currentTime - lastPrintTime >= 500) {
             // console.log(hero1.position, hero1.rotation);
