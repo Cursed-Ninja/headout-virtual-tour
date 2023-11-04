@@ -7,6 +7,16 @@ import morgan from "morgan"; // For logging requests into console
 
 import authRoutes from "./routes/auth.js" // importing authentication related routers
 import mediaRoutes from "./routes/media.js" // importing media related routers
+import cloudinary from "cloudinary"; // For uploading media to cloudinary
+// Return "https" URLs by setting secure: true
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+
+// Log the configuration
+console.log(cloudinary.config());
 
 dotenv.config();
 
@@ -24,11 +34,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use("/media", mediaRoutes);
 
+const CONNECTION_URL = `mongodb+srv://${process.env.DB_USERNAME
+  }:${encodeURIComponent(
+    process.env.DB_PSWD
+  )}@cluster.lczmihh.mongodb.net/headout?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+mongoose.connect(CONNECTION_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).then(() => {
-    app.listen(PORT, () => console.log(`SERVER PORT: ${PORT}`));
+  app.listen(PORT, () => console.log(`SERVER PORT: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
 
