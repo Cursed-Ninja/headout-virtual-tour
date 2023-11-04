@@ -16,7 +16,7 @@ export default function Tours() {
       <h1 className="my-10 text-3xl">
         <b>Explore Our Virtual Tours</b>
       </h1>
-      <div className="flex flex-row gap-3">
+      <div className="flex flex-wrap justify-between gap-3">
         {tours.map((tour) => (
           <Tour
             key={tour._id}
