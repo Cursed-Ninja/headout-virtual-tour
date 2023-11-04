@@ -53,7 +53,13 @@ To set up this project, follow these steps:
 - Bcrypt: Used for password hashing and authentication.
 - Multer: For handling file uploads.
 - Nodemailer: For sending emails.
+
+### Hosting and Deployment
+
+- Docker: Containerization technology used for packaging and deploying the application.
+- Azure Virtual Machine (VM): Hosting platform for the Docker container, allowing for deployment and accessibility of the application.
 - Cloudinary: Used for image and video storage.
+
 
 ## Additional Resources
 
@@ -66,6 +72,9 @@ To create this project, we modified and referenced several code snippets and ass
 
 ## Demo
 
-You can experience the Headout Virtual Tour by visiting the deployed version at [https://headout.onrender.com/](https://headout.onrender.com/). We hope you enjoy exploring various destinations from the comfort of your home!
+You can experience the Headout Virtual Tour by visiting the deployed version at [https://headout.onrender.com/](https://headout.onrender.com/). Please note that the onrender link provides HTTPS for secure browsing. However, it's important to mention that the onrender platform uses a free instance, which does not have disk storage, preventing the use of the upload feature for videos.
 
-If you have any questions or feedback, please don't hesitate to reach out to us. Thank you for using Headout Virtual Tour!
+For an alternative experience, you can access the Headout Virtual Tour on the Azure VM hosted container at [http://98.70.56.206:5000/](http://98.70.56.206:5000/). This link does not provide HTTPS, but it allows you to upload videos for an immersive tour experience.
+
+We hope you enjoy exploring various destinations from the comfort of your home on either platform! If you have any questions or feedback, please don't hesitate to reach out to us. Thank you for using Headout Virtual Tour!
+
