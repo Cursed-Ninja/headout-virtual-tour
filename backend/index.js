@@ -64,3 +64,5 @@ mongoose
     app.listen(PORT, () => console.log(`SERVER PORT: ${PORT}`));
   })
   .catch((error) => console.log(`${error} did not connect`));
+
+  export default app;
