@@ -18,9 +18,7 @@ const TourDetails = () => {
   useEffect(() => {
     (async () => {
       console.log(id);
-      const res = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/media/one?id=${id}`
-      );
+      const res = await fetch(`/media/one?id=${id}`);
       const data = await res.json();
       setVideoUrl(data.videos);
     })();

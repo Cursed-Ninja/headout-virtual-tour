@@ -5,7 +5,7 @@ export default function Tours() {
   const [tours, setTours] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/media/all`);
+      const res = await fetch(`/media/all`);
       const data = await res.json();
       setTours(data);
     })();
@@ -16,7 +16,7 @@ export default function Tours() {
       <h1 className="my-10 text-3xl">
         <b>Explore Our Virtual Tours</b>
       </h1>
-      <div className="flex flex-wrap justify-between gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {tours.map((tour) => (
           <Tour
             key={tour._id}

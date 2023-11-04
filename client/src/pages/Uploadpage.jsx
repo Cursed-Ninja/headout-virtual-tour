@@ -43,13 +43,10 @@ const UploadPage = () => {
       const formData = new FormData(event.currentTarget);
       formData.append("thumbnail", await convertBase64(uploadedThumbnailFile));
       formData.append("video", uploadedVideoFile);
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/media/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`/media/upload`, {
+        method: "POST",
+        body: formData,
+      });
 
       if (response.ok) {
         setIsUploaded(true);
