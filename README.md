@@ -22,7 +22,10 @@ This project is divided into three main components:
 
 To set up this project, follow these steps:
 
-1. Clone the repository from our [GitHub link](https://github.com/Cursed-Ninja/headout-virtual-tour).
+1. Clone the repository:
+    ```
+    git clone https://github.com/Cursed-Ninja/headout-virtual-tour
+    ```
 
 2. Configure environment variables by creating a `.env` file in the `backend` directory. You can use the `env.example` file as a template.
 
