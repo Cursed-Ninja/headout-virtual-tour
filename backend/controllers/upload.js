@@ -11,10 +11,10 @@ export const getAll = async (req, res) => {
     }
 };
 
-export const getMedia = async (req, res) => {
-    const { _id } = req.body;
+export const getOne = async (req, res) => {
+    const { id } = req.query;
     try {
-        const media = await Media.findById(_id);
+        const media = await Media.findById(id);
         res.json(media);
     } catch (error) {
         console.log(error);

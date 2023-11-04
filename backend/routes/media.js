@@ -1,5 +1,5 @@
 import express from "express";
-import { getAll, upload as uploadController } from "../controllers/upload.js";
+import { getAll, getOne, upload as uploadController } from "../controllers/upload.js";
 import multer from "multer";
 import fs from "fs";
 import path from "path";
@@ -73,7 +73,7 @@ const router = express.Router();
 
 //get all media
 router.get("/all", getAll);
-
+router.get("/one", getOne)
 //post create new media
 router.post(
     "/upload",
