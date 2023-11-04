@@ -80,16 +80,17 @@
 
         var camera1 = new BABYLON.ArcRotateCamera(
           "camera1",
-          Math.PI / 2,
+          -Math.PI / 2,
           Math.PI / 4,
-          10,
+          12,
           new BABYLON.Vector3(0, -5, 0),
           scene
         );
         scene.activeCamera = camera1;
         scene.activeCamera.attachControl(canvas, true);
-        camera1.lowerRadiusLimit = 2;
-        camera1.upperRadiusLimit = 10;
+        camera1.lowerRadiusLimit = 5;
+        camera1.upperRadiusLimit = 15;
+        camera1.lowerBetaLimit = 0;
         camera1.wheelDeltaPercentage = 0.01;
 
         // Lights
@@ -117,7 +118,7 @@
         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
         skyboxMaterial.backFaceCulling = false;
         skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-          "textures/skybox2",
+          "https://assets.babylonjs.com/skyboxes/skybox/skybox",
           scene
         );
         skyboxMaterial.reflectionTexture.coordinatesMode =
@@ -183,7 +184,7 @@
         // Create a cube obstacle
         const box = new BABYLON.MeshBuilder.CreateBox("crate", {size: 2}, scene);
         box.material = new BABYLON.StandardMaterial("Mat", scene);
-        box.material.diffuseTexture = new BABYLON.Texture("textures/crate.png", scene);
+        box.material.diffuseTexture = new BABYLON.Texture("textures/wood.jpg", scene);
         box.checkCollisions = true;
         box.position = new BABYLON.Vector3(0, 1, 10.0);
 
@@ -201,7 +202,7 @@
             hero1.scaling.scaleInPlace(0.1);
 
             //Position the character
-            hero1.position = new BABYLON.Vector3(4, 0, 0);
+            // hero1.position = new BABYLON.Vector3(4, 0, 0);
 
             //Lock camera on the character
             camera1.target = hero1;
@@ -310,10 +311,12 @@
             if (hero1) {
                 var currentTime = Date.now();
                 if (currentTime - lastPrintTime >= 500) {
-                console.log(hero1.position, hero1.rotation);
+                // console.log(hero1.position, hero1.rotation);
+                // console.log(camera1.position)
                 lastPrintTime = currentTime;
                 }
             }
+            // if(camera1 && camera1.position.y < 0) camera1.position.y = 0;
         });
 
         return scene;
