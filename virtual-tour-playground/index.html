@@ -143,23 +143,24 @@
         advancedTexture.addControl(instructions);
 
         // Ground
-        var ground = BABYLON.MeshBuilder.CreateGround(
-          "ground",
-          { height: 50, width: 50, subdivisions: 4 },
-          scene
-        );
-        var groundMaterial = new BABYLON.StandardMaterial(
-          "groundMaterial",
-          scene
-        );
-        groundMaterial.diffuseTexture = new BABYLON.Texture(
-          "https://assets.babylonjs.com/textures/wood.jpg",
-          scene
-        );
-        groundMaterial.diffuseTexture.uScale = 30;
-        groundMaterial.diffuseTexture.vScale = 30;
-        groundMaterial.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
-        ground.material = groundMaterial;
+        // var ground = BABYLON.MeshBuilder.CreateGround(
+        //   "ground",
+        //   { height: 50, width: 50, subdivisions: 4 },
+        //   scene
+        // );
+        // var groundNormalMap = new BABYLON.Texture("https://assets.babylonjs.com/textures/normalMap.jpg", scene);
+        // var groundMaterial = new BABYLON.StandardMaterial(
+        //   "groundMaterial",
+        //   scene
+        // );
+        // groundMaterial.diffuseTexture = new BABYLON.Texture(
+        //   "https://assets.babylonjs.com/textures/floor.png",
+        //   scene
+        // );
+        // groundMaterial.diffuseTexture.uScale = 30;
+        // groundMaterial.diffuseTexture.vScale = 30;
+        // groundMaterial.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+        // ground.material = groundMaterial;
 
         // Keyboard events
         var inputMap = {};
@@ -182,11 +183,30 @@
         );
 
         // Create a cube obstacle
-        const box = new BABYLON.MeshBuilder.CreateBox("crate", {size: 2}, scene);
-        box.material = new BABYLON.StandardMaterial("Mat", scene);
-        box.material.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/textures/wood.jpg", scene);
-        box.checkCollisions = true;
-        box.position = new BABYLON.Vector3(0, 1, 10.0);
+        // const box = new BABYLON.MeshBuilder.CreateBox("crate", {size: 2}, scene);
+        // box.material = new BABYLON.StandardMaterial("Mat", scene);
+        // box.material.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/textures/wood.jpg", scene);
+        // box.checkCollisions = true;
+        // box.position = new BABYLON.Vector3(0, 1, 10.0);
+
+        BABYLON.SceneLoader.ImportMesh(
+          "",
+          "textures/",
+          "low_poly_eiffel_tower.glb",
+          scene,
+          function (newMeshes, particleSystems, skeletons, animationGroups) {
+            // hero1 = newMeshes[0];
+
+            // //Scale the model down
+            // hero1.scaling.scaleInPlace(0.1);
+
+            //Position the character
+            // hero1.position = new BABYLON.Vector3(4, 0, 0);
+            const landscape = newMeshes[0];
+            landscape.position = new BABYLON.Vector3(0, -1, 0);
+
+          }
+        );
 
         var hero1;
         // Load hero character
