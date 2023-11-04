@@ -122,20 +122,33 @@ const TourDetails = () => {
   }, []);
 
   return (
-    <div className="player-wrapper">
-      <video
-        id="player"
-        className="player video-js vjs-default-skin vjs-big-play-centered"
-        crossorigin="anonymous"
-        preload="metadata"
-        autoplay
-        controls
-      >
-        <source
-          poster={posterLink}
-          src={videoLink}
-        />
-      </video>
+    <div ref={containerRef} className="tourdetails">
+      {isPlaying ? null : (
+        <Box
+          sx={{
+            background: "black",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: "0%",
+            left: "0%",
+            opacity: "40%",
+          }}
+        >
+          <Button
+            sx={{
+              zIndex: "10",
+              background: "red",
+              position: "absolute",
+              top: "45%",
+              left: "50%",
+              color: "white"
+            }}
+          >
+            <PlayCircleOutlineIcon />
+          </Button>
+        </Box>
+      )}
     </div>
   );
 };
