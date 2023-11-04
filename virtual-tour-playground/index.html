@@ -153,7 +153,7 @@
           scene
         );
         groundMaterial.diffuseTexture = new BABYLON.Texture(
-          "textures/wood.jpg",
+          "https://assets.babylonjs.com/textures/wood.jpg",
           scene
         );
         groundMaterial.diffuseTexture.uScale = 30;
@@ -184,7 +184,7 @@
         // Create a cube obstacle
         const box = new BABYLON.MeshBuilder.CreateBox("crate", {size: 2}, scene);
         box.material = new BABYLON.StandardMaterial("Mat", scene);
-        box.material.diffuseTexture = new BABYLON.Texture("textures/wood.jpg", scene);
+        box.material.diffuseTexture = new BABYLON.Texture("https://assets.babylonjs.com/textures/wood.jpg", scene);
         box.checkCollisions = true;
         box.position = new BABYLON.Vector3(0, 1, 10.0);
 
