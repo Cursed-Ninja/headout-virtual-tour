@@ -2,17 +2,17 @@ import React from "react";
 
 export default function Tour(props) {
   return (
-    <div className="mx-5">
+    <div>
       <img
         src={props.img}
         alt="card-1"
-        className="w-[176px] h-[235px] top-[521px] left-[37px] radius-[9px]"
+        className="aspect-video object-cover object-top h-[150px] top-[521px] left-[37px] radius-[9px] rounded"
       />
       <div className="flex flex-col">
         <h1 className="text-lg">
           <b>{props.heading}</b>
         </h1>
-        <p>{props.country}</p>
+        <p className="text-sm">{props.country}</p>
       </div>
     </div>
   );
