@@ -77,19 +77,3 @@ You can experience the Headout Virtual Tour by visiting the deployed version at 
 For an alternative experience, you can access the Headout Virtual Tour on the Azure VM hosted container at [http://98.70.56.206:5000/](http://98.70.56.206:5000/). This link does not provide HTTPS, but it allows you to upload videos for an immersive tour experience.
 
 We hope you enjoy exploring various destinations from the comfort of your home on either platform! If you have any questions or feedback, please don't hesitate to reach out to us. Thank you for using Headout Virtual Tour!
-
-## Video Demo
-
-[![Headout Virtual Tour Video](https://img.youtube.com/vi/your_video_id/0.jpg)](https://drive.google.com/file/d/1IHKqJslzNp9fHLqhKWPhElLCx2Y62mqc/view)
-
-## Images
-
-![Image 1](https://drive.google.com/file/d/1FBN80-TrOXVlnEtJvY0LaSWqvl2OJj7o/view?usp=sharing)
-
-![Image 2](https://drive.google.com/file/d/1Q7fG8tDCMpXQCTAtt_fpl_A0RIhZ8dVv/view?usp=sharing)
-
-![Image 3](https://drive.google.com/file/d/18606NrirHJTFKnudQiNlJ3hEF7V-dBCC/view?usp=sharing)
-
-![Image 4](https://drive.google.com/file/d/1jGO5cCy-DfQi4glMLJuoXld5SCt1vMSN/view?usp=sharing)
-
-![Image 5](https://drive.google.com/file/d/1jlMnRoSG6L_8nODkYg_oWfkWVhHdOPun/view?usp=sharing)
