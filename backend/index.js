@@ -5,7 +5,7 @@ import cors from "cors"; // Library to allow cross origin requests
 import dotenv from "dotenv"; // For extracting data from env files
 import morgan from "morgan"; // For logging requests into console
 
-import authRoutes from "../server/routes/auth.js" // importing authentication related routers
+import authRoutes from "./routes/auth.js" // importing authentication related routers
 
 dotenv.config();
 

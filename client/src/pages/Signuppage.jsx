@@ -24,6 +24,7 @@ import {
 const SignUp = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState(true); // true for seller, false for client
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,11 +36,12 @@ const SignUp = () => {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
       email: formData.get("email"),
+      isSeller: role,
     };
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/auth/signup`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/signup`,
         {
           method: "POST",
           headers: {
@@ -134,9 +136,11 @@ const SignUp = () => {
                       labelId="role-select-label"
                       id="role-select"
                       label="Role"
+                      value={role}
+                      handleChange={(e) => setRole(e.target.value)}
                     >
-                      <MenuItem value={true}>Client</MenuItem>
-                      <MenuItem value={false}>Seller</MenuItem>
+                      <MenuItem value={false}>Client</MenuItem>
+                      <MenuItem value={true}>Seller</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
@@ -17,9 +17,7 @@ import { useUserContext } from "../store/Context.jsx";
 const SignIn = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const {
-    dispatch,
-  } = useUserContext();
+  const { dispatch } = useUserContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +32,7 @@ const SignIn = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/auth/signin`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/signin`,
         {
           method: "POST",
           headers: {
@@ -48,13 +46,13 @@ const SignIn = () => {
 
       if (!responseData.error) {
         dispatch({
-            type: "LOGIN",
-            payload: {
-                user: responseData.user,
-                token: responseData.token,
-                isSeller: responseData.isSeller,
-            },
-          })
+          type: "LOGIN",
+          payload: {
+            user: responseData.user,
+            token: responseData.token,
+            isSeller: responseData.isSeller,
+          },
+        });
 
         navigate("/");
       } else {
