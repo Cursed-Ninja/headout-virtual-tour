@@ -1,5 +1,5 @@
 import React from "react";
-import Value from "./Value";
+import Value from "../data/Value";
 import Values from "./Values";
 
 export default function ValueList() {

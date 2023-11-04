@@ -1,17 +1,18 @@
 import React from "react";
-import Overlay from "./Overlay";
-import Valuelist from "./Valuelist";
-import Footer from "./Footer";
-import Tours from "./Tours";
+import Homepage from "./pages/Homepage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignUp from "./pages/Signuppage";
+import SignIn from "./pages/Signinpage";
 
 function App() {
   return (
-    <div>
-      <Overlay />
-      <Valuelist />
-      <Tours />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/signin" element={<SignIn />}/>
+        <Route path="/signup" element={<SignUp /> }/>
+        <Route path="/" element={<Homepage />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
